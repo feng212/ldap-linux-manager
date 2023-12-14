@@ -1,0 +1,58 @@
+system:
+  mode: debug
+  port: "8000"
+  url-path-prefix: ldap-api
+  init-data: true
+  rsa-public-key: go-ldap-admin-pub.pem
+  rsa-private-key: go-ldap-admin-priv.pem
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  username: "root"
+  password: "12346"
+  database: "ldap"
+  # 连接字符串参数
+  query: parseTime=True&loc=Local&timeout=10000ms
+  # 是否打印日志
+  log-mode: true
+  # 编码方式
+  charset: utf8mb4
+  # 字符集(utf8mb4_general_ci速度比utf8mb4_unicode_ci快些)
+  collation: utf8mb4_general_ci
+
+# # ldap 配置
+ldap:
+  # ldap服务器地址
+  url: ldap://172.16.5.76:389
+  # ladp最大连接数设置
+  max-conn: 10
+  # ldap服务器基础DN
+  base-dn: "dc=tengxun,dc=com"
+  # ldap管理员DN
+  admin-dn: "cn=admin,dc=tengxun,dc=com"
+  # ldap管理员密码
+  admin-pass: "212008"
+  # ldap用户OU
+  user-dn: "ou=weixin,dc=tengxun,dc=com"
+  # ldap用户初始默认密码
+  user-init-password: "123456"
+  # 是否允许更改分组DN
+  group-name-modify: false
+  # 是否允许更改用户DN
+  user-name-modify: false
+  # 默认邮箱后缀
+  default-email-suffix: "eryajf.net"
+# 📢 即便用不到如下三段配置信息，也不要删除，否则会有一些奇怪的错误出现
+
+# jwt配置
+jwt:
+  # jwt标识
+  realm: test jwt
+  # 服务端密钥
+  key: secret key
+  # token过期时间, 小时
+  timeout: 12000
+  # 刷新token最大过期时间, 小时
+  max-refresh: 12000
+
